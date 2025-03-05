@@ -1,6 +1,6 @@
 from flask import Flask
-from config import SECRET_KEY  # Importar la clave secreta
-from main.models import db, User  # Importar la base de datos y modelos
+from main.config.config import Config
+from main.models.models import db, User  # Importar la base de datos y modelos
 from flask_login import LoginManager
 import sys
 import os
@@ -9,14 +9,11 @@ import os
 # Agregar la carpeta raíz del proyecto al path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-import config
+from main.config import config
 
 app = Flask(__name__)  # Primero se crea la app
 
-app.config.from_object(config)  # Cargar la configuración
-app.secret_key = SECRET_KEY  # Asignar la clave secreta después
-
-
+app.config.from_object(Config)
 
 db.init_app(app)  # Inicializar SQLAlchemy
 
@@ -31,7 +28,7 @@ login_manager.login_message_category = "warning"
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-from main.routes import routes
+from main.routes import routes 
 
 app.register_blueprint(routes)
 
