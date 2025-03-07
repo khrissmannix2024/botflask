@@ -1,6 +1,9 @@
-body {
+html, body {
     font-family: Arial, sans-serif;
     background-color: #f8f9fa;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .navbar-brand {
@@ -8,11 +11,20 @@ body {
 }
 
 .container {
-    max-width: 600px;
+    max-width: 1200px;
 }
 
 footer {
-    position: fixed;
-    bottom: 0;
     width: 100%;
+    background-color: #f8f9fa;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: auto; /* Hace que el footer siempre quede abajo */
+}
+
+#content {
+    flex: 1; /* Empuja el contenido hacia arriba */
+}
+.dataTables_filter {
+    margin-bottom: 15px; /* Espacio entre el input de búsqueda y la tabla */
 }

@@ -9,7 +9,8 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(200), nullable=False)  # Hash de la contraseña
     created_at = db.Column(db.DateTime, default=datetime.utcnow)  # Fecha de creación
-
+    role = db.Column(db.String(20), nullable=False, default="usuario")  # Rol: "admin" o "usuario"
+    
     def set_password(self, password):
         """Cifra la contraseña y la almacena como hash."""
         self.password_hash = generate_password_hash(password)

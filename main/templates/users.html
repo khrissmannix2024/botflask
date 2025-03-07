@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}Usuarios Registrados{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid mt-4">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/users.css') }}">
+    <h2 class="text-center">Usuarios Registrados</h2>
+
+    <div class="table-responsive"> <!-- Hace que la tabla sea responsive sin scroll doble -->
+        <table id="tablaUsuarios" class="table table-striped table-hover table-bordered w-100">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Nombre de Usuario</th>
+                    <th>Correo Electrónico</th>
+                    <th>Fecha de Registro</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in usuarios %}
+                <tr>
+                    <td></td>
+                    <td>{{ usuario.username }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>{{ usuario.fecha_registro }}</td>
+                    <td>
+                        <!-- Botón para actualizar -->
+                        <button class="btn btn-warning btn-sm actualizar-btn" 
+                                data-id="{{ usuario.id }}" 
+                                data-username="{{ usuario.username }}" 
+                                data-email="{{ usuario.email }}">
+                            📝 Editar
+                        </button>
+        
+                        <!-- Botón para eliminar -->
+                        <button class="btn btn-danger btn-sm eliminar-btn" 
+                                data-id="{{ usuario.id }}">
+                            🗑 Eliminar
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal de Edición -->
+<div class="modal fade" id="modalEditarUsuario" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Editar Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formEditarUsuario">
+                    <input type="hidden" id="editUserId"> <!-- ID oculto -->
+                    <div class="mb-3">
+                        <label for="editUsername" class="form-label">Nombre de Usuario</label>
+                        <input type="text" class="form-control" id="editUsername" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editEmail" class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-control" id="editEmail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editPassword" class="form-label">Nueva Contraseña (opcional)</label>
+                        <input type="password" class="form-control" id="editPassword">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/users.js') }}"></script>
+{% endblock %}

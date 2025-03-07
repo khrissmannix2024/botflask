@@ -66,3 +66,16 @@
         color: #0056b3;
     }
 }
+@media (prefers-color-scheme: dark) {
+    footer {
+        background-color: #343a40 !important; /* Mismo color que otros elementos oscuros */
+        color: white;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    footer {
+        background-color: #f8f9fa;
+        color: black;
+    }
+}

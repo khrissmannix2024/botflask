@@ -3,46 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Mi Sitio{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
 
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Archivo CSS personalizado -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
 
     <!-- Ícono en la pestaña -->
     <link rel="icon" href="{{ url_for('static', filename='images/bot.ico') }}">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url_for('routes.index') }}">Mi Sitio</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('routes.index') }}">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('routes.register') }}">Registrarse</a></li>
-                    
-                    {% if current_user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link" href="{{ url_for('routes.cerrar_sesion') }}">Cerrar sesión</a></li>
-                    {% else %}
-                        <li class="nav-item"><a class="nav-link" href="{{ url_for('routes.iniciar_sesion') }}">Iniciar sesión</a></li>
-                    {% endif %}
-                </ul>
+    <div id="content">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="{{ url_for('routes.index') }}">Mepostbot</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('routes.index') }}">Inicio</a></li>
+                        {% if current_user.is_authenticated and current_user.role == "admin" %}
+                            <li class="nav-item"><a class="nav-link" href="{{ url_for('routes.lista_usuarios') }}">Usuarios</a></li>
+                        {% endif %}
+                        {% if not current_user.is_authenticated %}
+                            <li class="nav-item"><a class="nav-link" href="{{ url_for('routes.register') }}">Registrarse</a></li>
+                        {% endif %}
+                        {% if current_user.is_authenticated %}
+                            <li class="nav-item"><a class="nav-link" href="{{ url_for('routes.cerrar_sesion') }}">Cerrar sesión</a></li>
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link" href="{{ url_for('routes.iniciar_sesion') }}">Iniciar sesión</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
-    
+        </nav>
+        <!-- DataTables CSS y JS (solo carga, sin inicializar) -->
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 
-    <main class="container mt-5">
-        {% block content %}{% endblock %}
-    </main>
+        <main class="container mt-5">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
 
-    <footer class="text-center mt-5 py-3 bg-light">
-        <p>&copy; 2025 Mi Sitio Web</p>
+    <footer class="text-center py-3">
+        <p>&copy; 2025 KhrissMannix</p>
     </footer>
 
     <!-- Bootstrap JS -->

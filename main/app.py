@@ -2,9 +2,9 @@ from flask import Flask
 from main.config.config import Config
 from main.models.models import db, User  # Importar la base de datos y modelos
 from flask_login import LoginManager
+from flask_migrate import Migrate  # Agregar Flask-Migrate
 import sys
 import os
-
 
 # Agregar la carpeta raíz del proyecto al path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -16,6 +16,9 @@ app = Flask(__name__)  # Primero se crea la app
 app.config.from_object(Config)
 
 db.init_app(app)  # Inicializar SQLAlchemy
+
+# Inicializar Flask-Migrate
+migrate = Migrate(app, db)  # 👈 Agregado aquí
 
 # Configurar Flask-Login
 login_manager = LoginManager()

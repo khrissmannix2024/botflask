@@ -8,14 +8,22 @@
         <div class="col-md-6">
             <h2 class="text-center mb-4">Registrarse</h2>
 
-            <!-- Mostrar los mensajes de Flash -->
-            {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                    <div class="alert alert-{{ messages[0][0] }}">
-                        {{ messages[0][1] }}
+            <!-- Toast para mensajes flash -->
+            <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+                <div id="flashMessage" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            {% with messages = get_flashed_messages(with_categories=true) %}
+                                {% if messages %}
+                                    {{ messages[0][1] }}
+                                {% endif %}
+                            {% endwith %}
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                     </div>
-                {% endif %}
-            {% endwith %}
+                </div>
+            </div>
+
 
             <form method="POST" action="{{ url_for('routes.register') }}">
                 <!-- Campo de Nombre de Usuario -->
@@ -42,4 +50,6 @@
         </div>
     </div>
 </div>
+<!-- Mensajes de error y alertas-->
+<script src="{{ url_for('static', filename='js/register.js') }}"></script>
 {% endblock %}
