@@ -1,6 +1,6 @@
 from flask import render_template, request, flash, redirect, url_for, session, jsonify
 from flask_login import login_user, logout_user, login_required, current_user
-from main.models import db, User
+from models import db, User
 import re
 
 def validar_contraseña(password):

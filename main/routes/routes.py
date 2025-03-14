@@ -1,5 +1,5 @@
 from flask import Blueprint
-from main.controllers.controllers import index, register, iniciar_sesion, cerrar_sesion, lista_usuarios, editar_usuario, eliminar_usuario
+from controllers.controllers import index, register, iniciar_sesion, cerrar_sesion, lista_usuarios, editar_usuario, eliminar_usuario
 
 routes = Blueprint("routes", __name__)
 

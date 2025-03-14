@@ -1,1 +1,1 @@
-# Archivo __init__.py en config (puede estar vacío)
+from config.config import Config

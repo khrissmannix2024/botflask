@@ -9,10 +9,10 @@
     <h2 class="text-center">Usuarios Registrados</h2>
 
     <div class="table-responsive"> <!-- Hace que la tabla sea responsive sin scroll doble -->
-        <table id="tablaUsuarios" class="table table-striped table-hover table-bordered w-100">
-            <thead class="table-dark">
+        <table id="tablaUsuarios" class="table table-striped">
+            <thead>
                 <tr>
-                    <th>#</th>
+                    <th>ID</th>
                     <th>Nombre de Usuario</th>
                     <th>Correo Electrónico</th>
                     <th>Fecha de Registro</th>
@@ -22,13 +22,13 @@
             <tbody>
                 {% for usuario in usuarios %}
                 <tr>
-                    <td></td>
+                    <td>{{ usuario.id }}</td>
                     <td>{{ usuario.username }}</td>
                     <td>{{ usuario.email }}</td>
-                    <td>{{ usuario.fecha_registro }}</td>
+                    <td>{{ usuario.created_at }}</td>
                     <td>
                         <!-- Botón para actualizar -->
-                        <button class="btn btn-warning btn-sm actualizar-btn" 
+                        <button class="btn btn-success btn-sm actualizar-btn" 
                                 data-id="{{ usuario.id }}" 
                                 data-username="{{ usuario.username }}" 
                                 data-email="{{ usuario.email }}">

@@ -1,6 +1,6 @@
 $(document).ready(function () {
     let $tablaUsuarios = $("#tablaUsuarios");
-    let table; // Declarar la variable globalmente
+    let table;
 
     if ($tablaUsuarios.length) {
         // Destruir DataTable solo si ya está inicializado
@@ -11,7 +11,7 @@ $(document).ready(function () {
         // Inicializar DataTable correctamente
         table = $tablaUsuarios.DataTable({
             paging: true,
-            autoWidth: false,
+            autoWidth: true,
             responsive: true,
             language: {
                 lengthMenu: "Mostrar _MENU_ registros por página",
@@ -25,25 +25,9 @@ $(document).ready(function () {
                     previous: "Anterior"
                 }
             },
-            columnDefs: [
-                { 
-                    targets: 0, // Primera columna (numeración)
-                    searchable: false, 
-                    orderable: false, 
-                    render: function (data, type, row, meta) {
-                        return meta.row + 1;
-                    }
-                }
-            ],
-            order: [[1, "asc"]] // Ordenar por nombre de usuario
+            lengthMenu: [5, 10, 25, 50],
+            order: [[1, "asc"]] // Ordenar filas por nombre
         });
-
-        // Actualizar numeración tras ordenar, buscar o cambiar de página
-        table.on("order.dt search.dt draw.dt", function () {
-            table.column(0, { search: "applied", order: "applied" }).nodes().each(function (cell, i) {
-                cell.innerHTML = i + 1; // Reenumerar correctamente
-            });
-        }).draw();
     }
 
     // Delegación de eventos para botones dinámicos
