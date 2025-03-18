@@ -1,5 +1,36 @@
-{{% extends "base.html" %}}
+{% extends "base.html" %}
 
-<title>Perfil de usuario</title>
-<label for=""> <input type="text" >nombre</label>
-{{% endblock %}}
+{% block title %}Perfil de usuario{% endblock %}
+
+{% block css %}    
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-3">Perfil de Usuario</h2>
+    <div class="card p-3">
+        <p><strong>Nombre:</strong> {{ usuarios.username }}</p>
+        <p><strong>Email:</strong> {{ usuarios.email }}</p>
+        <p><strong>Fecha de registro:</strong> {{ usuarios.created_at.strftime('%d/%m/%Y') }}</p>
+        
+        <div class="perfil-buttons">
+            <!-- Botón para actualizar -->
+            <button class="btn btn-success btn-sm actualizar-btn" 
+                data-id="{{ usuarios.id }}" 
+                data-username="{{ usuarios.username }}" 
+                data-email="{{ usuarios.email }}">
+                <i class="fas fa-edit"></i> Editar
+            </button>
+        
+            <!-- Botón para eliminar -->
+            <button class="btn btn-danger btn-sm eliminar-btn" 
+                data-id="{{ usuarios.id }}">
+                <i class="fas fa-trash"></i> Eliminar
+            </button>
+        </div>
+        
+    </div>
+</div>
+{% include 'partials/modal_edicion_users.html' %}
+{% endblock %}
+{% block js %}<script src="{{ url_for('static', filename='js/users.js') }}"></script>{% endblock %}

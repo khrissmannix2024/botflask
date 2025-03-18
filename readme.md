@@ -11,7 +11,6 @@ Este repositorio contiene un proyecto personal (**en desarrollo**) en Python con
 - main/ → Carpeta que contiene todo el código del proyecto.
 - app.py → Archivo principal del proyecto.
 - .gitignore → Archivo para omitir la sincronización de archivos innecesarios en el repositorio remoto.
-- main/data/database.db → Archivo de la base de datos.
 - requirements.txt
 
 #### Tecnologías utilizadas

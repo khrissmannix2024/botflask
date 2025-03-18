@@ -144,4 +144,4 @@ def eliminar_usuario(id):
 
 @login_required
 def perfil():
-    return render_template("perfil.html")
+    return render_template("perfil.html", usuarios=current_user)

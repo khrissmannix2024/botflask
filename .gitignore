@@ -5,3 +5,9 @@ __pycache__/
 # Ignorar entornos virtuales
 venv/
 *.env
+
+# Ignorar la base de datos SQLite
+*.db
+
+# Ignorar migraciones de Flask-Migrate
+migrations/

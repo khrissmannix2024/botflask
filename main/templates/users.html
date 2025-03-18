@@ -3,12 +3,10 @@
 {% block title %}Usuarios Registrados{% endblock %}
 
 {% block content %}
-
 <div class="container-fluid mt-4">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/users.css') }}">
     <h2 class="text-center">Usuarios Registrados</h2>
 
-    <div class="table-responsive"> <!-- Hace que la tabla sea responsive sin scroll doble -->
+    <div class="table-responsive"> 
         <table id="tablaUsuarios" class="table table-striped">
             <thead>
                 <tr>
@@ -32,13 +30,13 @@
                                 data-id="{{ usuario.id }}" 
                                 data-username="{{ usuario.username }}" 
                                 data-email="{{ usuario.email }}">
-                            📝 Editar
+                                <i class="fas fa-edit"></i> Editar
                         </button>
         
                         <!-- Botón para eliminar -->
                         <button class="btn btn-danger btn-sm eliminar-btn" 
                                 data-id="{{ usuario.id }}">
-                            🗑 Eliminar
+                                <i class="fas fa-trash"></i> Eliminar
                         </button>
                     </td>
                 </tr>
@@ -48,34 +46,6 @@
     </div>
 </div>
 
-<!-- Modal de Edición -->
-<div class="modal fade" id="modalEditarUsuario" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalLabel">Editar Usuario</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <form id="formEditarUsuario">
-                    <input type="hidden" id="editUserId"> <!-- ID oculto -->
-                    <div class="mb-3">
-                        <label for="editUsername" class="form-label">Nombre de Usuario</label>
-                        <input type="text" class="form-control" id="editUsername" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editEmail" class="form-label">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="editEmail" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editPassword" class="form-label">Nueva Contraseña (opcional)</label>
-                        <input type="password" class="form-control" id="editPassword">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<script src="{{ url_for('static', filename='js/users.js') }}"></script>
+{% include 'partials/modal_edicion_users.html' %}
 {% endblock %}
+{% block js %}<script src="{{ url_for('static', filename='js/users.js') }}"></script>{% endblock %}
