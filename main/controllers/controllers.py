@@ -143,5 +143,5 @@ def eliminar_usuario(id):
         return jsonify({"error": "No tienes permisos para eliminar este usuario."}), 403  
 
 @login_required
-def perfil():
-    return render_template("perfil.html", usuarios=current_user)
+def profile():
+    return render_template("profile.html", usuarios=current_user)
