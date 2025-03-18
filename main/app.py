@@ -4,6 +4,10 @@ from flask_migrate import Migrate
 from extensions.manager_login import login_manager
 from extensions.migrate import migrate
 
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+
 from config import Config
 
 app = Flask(__name__)

@@ -9,7 +9,7 @@ Este repositorio contiene un proyecto personal (**en desarrollo**) en Python con
 ### 📂 Estructura del repositorio
 #### botflask
 - main/ → Carpeta que contiene todo el código del proyecto.
-- app.py → Archivo principal del proyecto.
+- main/app.py → Archivo principal del proyecto.
 - .gitignore → Archivo para omitir la sincronización de archivos innecesarios en el repositorio remoto.
 - requirements.txt
 
