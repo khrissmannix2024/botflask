@@ -13,6 +13,12 @@ from config import Config
 app = Flask(__name__)
 app.config.from_object(Config)
 
+DB_PATH = app.config["SQLALCHEMY_DATABASE_URI"].replace("sqlite:///", "")
+
+if not os.path.exists(DB_PATH):  # Verifica si el archivo existe
+    with app.app_context():
+        db.create_all()
+
 db.init_app(app)
 migrate.init_app(app, db)
 login_manager.init_app(app)
