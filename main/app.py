@@ -1,5 +1,5 @@
 from flask import Flask
-from models.models import db, User  
+from main.models.models import db, User
 from flask_migrate import Migrate
 from extensions.manager_login import login_manager
 from extensions.migrate import migrate
