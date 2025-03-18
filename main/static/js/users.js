@@ -8,7 +8,7 @@ $(document).ready(function () {
             $tablaUsuarios.DataTable().clear().destroy();
         }
 
-        // Inicializar DataTable correctamente
+        // Inicializar DataTable
         table = $tablaUsuarios.DataTable({
             paging: true,
             autoWidth: true,
