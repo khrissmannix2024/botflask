@@ -1,1 +1,1 @@
-from .routes import routes  # Importar el blueprint de rutas
+from .routes import routes 

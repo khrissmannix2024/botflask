@@ -13,6 +13,15 @@ Este repositorio contiene un proyecto personal (**en desarrollo**) en Python con
 - .gitignore → Archivo para omitir la sincronización de archivos innecesarios en el repositorio remoto.
 - requirements.txt
 
+### Crear usuario administrador
+Decidí no implementar una interfaz gráfica para crear un usuario administrador.
+Si deseas crear uno, (recomendado para ver toda la funcionalidad de la app),
+entonces debes ejecutar en la consola del entorno virtual, si lo creaste, el siguiente comando:
+1. Crea un user admin:
+    ```bash
+    python main/crear_admin.py
+El archivo está dentro de main. Puedes modificar las credenciales.
+
 #### Tecnologías utilizadas
 - **Backend:** Python 3.13, Flask
 - **Frontend:** HTML, CSS, JS, Bootstrap, jQuery

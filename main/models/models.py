@@ -1,4 +1,4 @@
-from . import db 
+from . import db
 from flask_login import UserMixin  # Importa UserMixin
 from datetime import datetime
 import pytz  # Módulo para manejar zonas horarias

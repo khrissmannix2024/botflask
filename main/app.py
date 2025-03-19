@@ -1,14 +1,10 @@
 import os
 import sys
 from flask import Flask
-from flask_migrate import Migrate
-
-sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+from config import Config
 
 from models.models import db, User 
-from extensions.manager_login import login_manager
-from extensions.migrate import migrate
-from config import Config
+from extensions import migrate, login_manager
 from routes import routes
 
 app = Flask(__name__)
