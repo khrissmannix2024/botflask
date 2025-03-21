@@ -5,7 +5,7 @@ from models.models import User
 migrate = Migrate()
 login_manager = LoginManager()
 
-login_manager.login_view = "routes.iniciar_sesion"  # Redirigir si no ha iniciado sesión
+login_manager.login_view = "routes.login"  # Redirigir si no ha iniciado sesión
 login_manager.login_message = "Por favor, inicia sesión para acceder a esta página."
 login_manager.login_message_category = "warning"
 

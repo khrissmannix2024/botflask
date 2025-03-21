@@ -1,36 +1,25 @@
 $(document).ready(function () {
-    let $tablaUsuarios = $("#tablaUsuarios");
-    let table;
+    let table = $("#tablaUsuarios").DataTable({
+        paging: true,
+        autoWidth: true,
+        responsive: true,
+        language: {
+            lengthMenu: "Mostrar _MENU_ registros por página",
+            zeroRecords: "No se encontraron registros",
+            info: "Mostrando página _PAGE_ de _PAGES_",
+            infoEmpty: "No hay registros disponibles",
+            infoFiltered: "(filtrado de _MAX_ registros en total)",
+            search: "Buscar:",
+            paginate: {
+                next: "Siguiente",
+                previous: "Anterior"
+            }
+        },
+        lengthMenu: [5, 10, 25, 50],
+        order: [[1, "asc"]]
+    });
 
-    if ($tablaUsuarios.length) {
-        // Destruir DataTable solo si ya está inicializado
-        if ($.fn.DataTable.isDataTable($tablaUsuarios)) {
-            $tablaUsuarios.DataTable().clear().destroy();
-        }
-
-        // Inicializar DataTable
-        table = $tablaUsuarios.DataTable({
-            paging: true,
-            autoWidth: true,
-            responsive: true,
-            language: {
-                lengthMenu: "Mostrar _MENU_ registros por página",
-                zeroRecords: "No se encontraron registros",
-                info: "Mostrando página _PAGE_ de _PAGES_",
-                infoEmpty: "No hay registros disponibles",
-                infoFiltered: "(filtrado de _MAX_ registros en total)",
-                search: "Buscar:",
-                paginate: {
-                    next: "Siguiente",
-                    previous: "Anterior"
-                }
-            },
-            lengthMenu: [5, 10, 25, 50],
-            order: [[1, "asc"]] // Ordenar filas por nombre
-        });
-    }
-
-    // Delegación de eventos para botones dinámicos
+    // Delegar evento de clic para actualizar usuario
     $(document).on("click", ".actualizar-btn", function () {
         let userId = $(this).data("id");
         let username = $(this).data("username");
@@ -52,7 +41,7 @@ $(document).ready(function () {
         let updatedData = {
             username: $("#editUsername").val(),
             email: $("#editEmail").val(),
-            password: $("#editPassword").val() || null // Enviar null si no hay cambio de contraseña
+            password: $("#editPassword").val() || null
         };
 
         $.ajax({
@@ -62,15 +51,20 @@ $(document).ready(function () {
             data: JSON.stringify(updatedData),
             success: function () {
                 alert("Usuario actualizado correctamente");
-                location.reload();
+                location.reload(); // Recargar la página para reflejar cambios
             },
-            error: function () {
-                alert("Error al actualizar usuario");
+            error: function (xhr) {
+                let response = xhr.responseJSON; 
+                if (response && response.error) {
+                    alert(response.error); 
+                } else {
+                    alert("Error al actualizar usuario");
+                }
             }
         });        
     });
 
-    // Manejo de eliminación de usuario
+    // Delegar evento de clic para eliminar usuario
     $(document).on("click", ".eliminar-btn", function () {
         let userId = $(this).data("id");
 
@@ -79,12 +73,12 @@ $(document).ready(function () {
                 url: `/usuarios/eliminar/${userId}`, 
                 type: "POST",
                 success: function (response) {
-                    alert(response.message); // Muestra el mensaje de éxito desde el servidor
-                    location.reload(); // Recarga la página
+                    alert(response.message);
+                    location.reload(); // Recargar la página para reflejar cambios
                 },
                 error: function (xhr) {
                     let errorMessage = xhr.responseJSON ? xhr.responseJSON.error : "Error al eliminar usuario.";
-                    alert(errorMessage); // Muestra el mensaje de error real
+                    alert(errorMessage);
                 }
             });
         }
