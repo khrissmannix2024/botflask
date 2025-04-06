@@ -1,0 +1,35 @@
+body {
+    background-color: var(--bs-body-bg); /* Se adapta al modo oscuro/claro */
+}
+
+.post-container {
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.post-card {
+    background: var(--bs-body-bg); /* Se adapta al modo oscuro */
+    color: var(--bs-body-color); /* Texto en modo claro/oscuro */
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 5px var(--bs-border-color);
+    margin-bottom: 20px;
+    border: 1px solid var(--bs-border-color);
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.post-header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.post-content {
+    font-size: 16px;
+}

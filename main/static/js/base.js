@@ -12,3 +12,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
     darkModeQuery.addEventListener("change", applyDarkModePreference);
 });
+

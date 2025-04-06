@@ -23,11 +23,11 @@ with app.app_context():
     else:
         # Crear usuario administrador
         admin = User(
-            username="admin",
-            email="admin@gmail.com",
+            username="Rudeus",
+            email="rudy@gmail.com",
             role="admin"  
         )
-        admin.set_password("admin1234")  # Cambia la contraseña.
+        admin.set_password("Hola1234")  # Cambia la contraseña.
 
         # Guardar en la base de datos
         db.session.add(admin)

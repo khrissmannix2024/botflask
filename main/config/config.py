@@ -7,7 +7,7 @@ class Config:
     if os.environ.get("RENDER"):
         DB_PATH = "/tmp/database.db"  # Ruta válida en Render
     else:
-        DB_PATH = os.path.join(BASE_DIR, "..", "data", "database.db")
+        DB_PATH = os.path.abspath(os.path.join(BASE_DIR, "..", "data", "database.db"))
 
     SQLALCHEMY_DATABASE_URI = "sqlite:///" + DB_PATH
     SQLALCHEMY_TRACK_MODIFICATIONS = False

@@ -30,7 +30,7 @@ El archivo está dentro de main. Puedes modificar las credenciales.
 #### Cómo ejecutar el proyecto
 1. Clona el repositorio:  
    ```bash
-   git clone https://github.com/khrissmannix2024/botflask.git
+   git clone https://github.com/khrissmorales/botflask.git
 
 #### Instalar librerías utilizadas
 1. Cualquier persona que clone el repositorio necesita ejecutar para el proyecto:

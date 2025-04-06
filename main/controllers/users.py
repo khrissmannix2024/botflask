@@ -4,17 +4,29 @@ from flask import flash, redirect, abort, render_template, request, jsonify, ses
 from flask_login import current_user, login_required, logout_user
 from models import db, User
 
+# Funcion para obtener usuarios
+def obtener_usuarios(formato="html"):
+    """Obtiene la lista de usuarios, devolviendo JSON o datos para renderizar"""
+    usuarios = User.query.all()
+    
+    if formato == "json":
+        return [{"id": u.id, "username": u.username} for u in usuarios]
+    
+    return usuarios  # Devuelve la lista de objetos User para renderizar HTML
+
+@login_required
+def api_usuarios():
+    """API para obtener usuarios en formato JSON"""
+    return jsonify(obtener_usuarios(formato="json"))
+
 @login_required
 def lista_usuarios():
-    # Decidí no usar Ajax aquí para cargar los usuarios por dos razones:
-    # 1 - Al tener el registro en otra vista no se cargará a la tabla inmediatamente 
-    # sin recargar la página (a menos que use un temporizador o WebSockets).
-    # 2- Como la app no va a ser muy grande no es necesario por ahora que se el registro se cargue enseguida.
-    if not current_user.role == "admin": # Si no es administrador no muestra a tabla.
+    """Renderiza la tabla de usuarios en HTML"""
+    
+    if not current_user.role == "admin":
         abort(401)
     
-    usuarios = User.query.all()
-    return render_template("users.html", usuarios=usuarios)
+    return render_template("users.html", usuarios=obtener_usuarios())
 
 @login_required
 def editar_usuario(id):

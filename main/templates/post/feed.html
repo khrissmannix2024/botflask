@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %} Publicaciones {% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/feed.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 600px;">
+    <div class="d-flex justify-content-between align-items-center mb-4 p-3 bg-body-tertiary rounded shadow-sm">
+        <h2 class="m-0 text-primary">📢 Publicaciones</h2>
+        <button type="button" class="btn btn-success fw-bold px-4" data-bs-toggle="modal" data-bs-target="#postModal">
+            <i class="bi bi-pencil-square"></i> Crear publicación
+        </button>
+    </div>
+</div>
+
+<div class="container post-container">
+    {% for post in posts %}
+    <div class="post-card">
+        <div class="post-header">
+            <img src="{{ url_for('static', filename='images/bot.ico') }}" alt="Avatar">
+            <strong>{{ post.autor if post.autor else "Anónimo" }}</strong>
+        </div>
+        <p class="post-content">{{ post.contenido }}</p>
+        <small class="text-muted">Publicado el {{ post.fecha_creacion.strftime('%d/%m/%Y %H:%M') }}</small>
+
+        <!-- Botones de reacción -->
+        <div class="reaction-buttons">
+            <button class="btn btn-outline-primary react-btn" data-post="{{ post.id }}" data-type="like">👍</button>
+            <button class="btn btn-outline-danger react-btn" data-post="{{ post.id }}" data-type="love">❤️</button>
+            <button class="btn btn-outline-warning react-btn" data-post="{{ post.id }}" data-type="haha">😂</button>
+            <button class="btn btn-outline-info react-btn" data-post="{{ post.id }}" data-type="wow">😮</button>
+            <button class="btn btn-outline-secondary react-btn" data-post="{{ post.id }}" data-type="sad">😢</button>
+            <button class="btn btn-outline-danger react-btn" data-post="{{ post.id }}" data-type="angry">😡</button>
+        </div>
+
+        <!-- Contador de reacciones -->
+        <div class="reaction-counts" id="reaction-counts-{{ post.id }}">
+            👍 {{ post.reacciones | selectattr('tipo', 'equalto', 'like') | list | length }}
+            ❤️ {{ post.reacciones | selectattr('tipo', 'equalto', 'love') | list | length }}
+            😂 {{ post.reacciones | selectattr('tipo', 'equalto', 'haha') | list | length }}
+            😮 {{ post.reacciones | selectattr('tipo', 'equalto', 'wow') | list | length }}
+            😢 {{ post.reacciones | selectattr('tipo', 'equalto', 'sad') | list | length }}
+            😡 {{ post.reacciones | selectattr('tipo', 'equalto', 'angry') | list | length }}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% include 'partials/modal_post.html' %}
+{% endblock %}
+{% block js %} <script src="{{ url_for('static', filename='js/feed.js') }}"></script> {% endblock %}
